@@ -1,0 +1,117 @@
+Script started on Tue 18 Nov 2014 10:12:09 AM PST
+]0;kale001@empress:~[kale001@empress ~]$ echo[K[K[K[Kecho "Displaying Problem 4"
+Displaying Problem 4
+]0;kale001@empress:~[kale001@empress ~]$ cat power.lsp
+(defun power (x y)
+(if (= y 0) 1                   ;; returning 1 if raised to 0
+(* x (power x (1- y)))))        ;; recursive call
+
+(print " Checking (power 5 2) ")
+(power 5 2)
+(print " Checking (power 6 3) ")
+(power 6 3)
+                ]0;kale001@empress:~[kale001@empress ~]$ cat power.lspecho "Displaying Problem 4"[1P 4"[1P 4"[1P 4"[1P 4"[1P 4"[1P 4"r 4"o 4"b 4"l 4"e 4"m 4"[C[C[1P"5"[C
+Displaying Problem 5
+]0;kale001@empress:~[kale001@empress ~]$ echo "Displaying Problem 5"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pcat power.lsp[C[C[K[K[K[K[K[K[K[K[Kzerosinlist.lsp
+(defun zerosinlist (list)
+  (cond
+    ((null list) 0)					;; returning 0 if list is null
+    ((= (car list) 0 ) (1+ (zerosinlist (cdr list))))   ;; adding 1 and recursing if element[0] is 0
+    (t (zerosinlist (cdr list)))))			;; recursing if element[0] is not 0.
+    
+(print " Checking zeros in list '(4 1 1 0 0 4) ")
+(zerosinlist '(4 1 1 0 0 4))
+(print " Checking zeros in list '(9 2 2 6 5) ")
+(zerosinlist '(9 2 2 6 5))
+]0;kale001@empress:~[kale001@empress ~]$ cat zerosinlist.lspecho "Displaying Problem 5"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[14Pcat power.lspecho "Displaying Problem 5"[1P"1"2"[C
+Displaying Problem 12
+]0;kale001@empress:~[kale001@empress ~]$ echo "Displaying Problem 12"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[9Pcat zerosinlist.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsp[1P.lsps.lspt.lspr.lspu.lspc.lspt.lspu.lspr.lspe.lspc.lsph.lspe.lspc.lspk.lspe.lspr.lsp[C[C[C[C
+
+(defun structurechecker (list1 list2)
+  (cond
+  ((and (atom list1) (atom list2))                          t)  ;; checking if elem[0] of both the lists is an atom
+  ((and (null list1) (null list2)) 			    t)	;; checking if both the lists are null
+  ((and (not (null list1)) (null list2))                  nil)	;; checking if list2 is null and list1 isn't
+  ((and (null list1) (not (null list2)))                  nil)	;; checking if list1 is null and list2 isn't
+  ((and (not (atom(car list1))) (atom(car list2)))        nil)	;; checking if elem[0] of list2 is an atom and elem[0] of list 1 isn't
+  ((and (not (atom(car list2))) (atom(car list1)))        nil)	;; checking if elem[0] of list1 is an atom and elem[0] of list 2 isn't
+    (
+    (and 
+      (atom(car list2)) 
+      (atom(car list1))
+      (structurechecker (cdr list1)(cdr list2))
+    )
+  )								;; recursive call if elem[0] of both the lists is an atom
+  (
+    (and 
+      (structurechecker (car list1)(car list2))    
+      (structurechecker (cdr list1)(cdr list2))
+    )
+  )								;; recursive call if elem[0] of both the lists is a list  
+
+  )
+)
+
+(print "Testing structurechecker")
+(print "Checking '() '(1 2 ())")
+(print (structurechecker '()'(1 2 ())))
+(print "Checking '(1 2 (1 2)) '(x y (a b))")
+(print (structurechecker '(1 2 (1 2)) '(x y (a b))))
+(print "Checking '(1 2 3) '(a b c)")
+(print (structurechecker '(1 2 3) '(a b c)))
+(print "Checking '(1 2 (1 (9 0) 2)) '(x y (a (s f)b))")
+(print (structurechecker '(1 2 (1 (9 0) 2)) '(x y (a (s f)b))))
+(print "Checking '(1 0 0 (x c v) (x (0 n) x )) '(1 0 0 (0 5 4) (7 (p) 7))")
+(print (structurechecker '(1 0 0 (x c v) (x (0 n) x )) '(1 0 0 (0 5 4) (7 (p) 7))))]0;kale001@empress:~[kale001@empress ~]$ 
+]0;kale001@empress:~[kale001@empress ~]$ 
+]0;kale001@empress:~[kale001@empress ~]$ clisp
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "power.lsp")[1]> [1]> (load "power.lsp")
+;; Loading file power.lsp ...
+" Checking (power 5 2) " 
+" Checking (power 6 3) " 
+;; Loaded file power.lsp
+T
+[2]> (load "power.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")z.lsp")e.lsp")r.lsp")o.lsp")s.lsp")i.lsp")n.lsp")l.lsp")i.lsp")s.lsp")t.lsp")[2]> (load "zerosinlist.[2]> (load "zerosinlist.l[2]> (load "zerosinlist.ls[2]> (load "zerosinlist.lsp[2]> (load "zerosinlist.lsp"[2]> (load "zerosinlist.lsp")
+;; Loading file zerosinlist.lsp ...
+" Checking zeros in list '(4 1 1 0 0 4) " 
+" Checking zeros in list '(9 2 2 6 5) " 
+;; Loaded file zerosinlist.lsp
+T
+[3]> (load "zerosinlist.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")[1P.lsp")s.lsp")t.lsp")r.lsp")u.lsp")c.lsp")t.lsp")u.lsp")r.lsp")e.lsp")c.lsp")h.lsp")e.lsp")c.lsp")k.lsp")e.lsp")r.lsp")[3]> (load "structurechecker.[3]> (load "structurechecker.l[3]> (load "structurechecker.ls[3]> (load "structurechecker.lsp[3]> (load "structurechecker.lsp"[3]> (load "structurechecker.lsp")
+;; Loading file structurechecker.lsp ...
+"Testing structurechecker" 
+"Checking '() '(1 2 ())" 
+NIL 
+"Checking '(1 2 (1 2)) '(x y (a b))" 
+T 
+"Checking '(1 2 3) '(a b c)" 
+T 
+"Checking '(1 2 (1 (9 0) 2)) '(x y (a (s f)b))" 
+T 
+"Checking '(1 0 0 (x c v) (x (0 n) x )) '(1 0 0 (0 5 4) (7 (p) 7))" 
+NIL 
+;; Loaded file structurechecker.lsp
+T
+[4]> 
+Bye.
+]0;kale001@empress:~[kale001@empress ~]$ exit
+
+Script done on Tue 18 Nov 2014 10:17:50 AM PST

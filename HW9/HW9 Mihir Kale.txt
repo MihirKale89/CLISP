@@ -1,0 +1,17 @@
+10. What does the following Scheme function do? 
+             (define (x lis)
+               (cond
+                 ((null? lis) 0)
+                 ((not (list? (car lis)))
+                   (cond
+                     ((eq? (car lis) #f) (x (cdr lis)))
+                     (else (+ 1 (x (cdr lis))))))
+                 (else (+ (x (car lis)) (x (cdr lis))))
+
+It counts the number of leaf nodes a nested list structure, ignoring #f. It uses a recursive procedure. 
+-If the input is an empty list, this is the base case that returns 0. 
+-If the input is a pair whose car is not a list:
+-If the car is #f, we recurse on the cdr and return that.
+-Otherwise we count the car as 1, and add that to the result of recursing on the cdr.
+-Finally, we recurse on both the car and cdr, and add them together.
+
